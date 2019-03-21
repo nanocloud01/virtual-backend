@@ -1,4 +1,4 @@
-package bo.gob.asfi.virtual.model.entiies;
+package bo.gob.asfi.virtual.model.entities;
 
 import java.io.Serializable;
 import java.util.List;

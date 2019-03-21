@@ -6,8 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import bo.gob.asfi.virtual.model.entiies.Greeting;
-import bo.gob.asfi.virtual.model.entiies.Usuario;
+import bo.gob.asfi.virtual.model.entities.Greeting;
 
 @RestController
 public class GreetingController {

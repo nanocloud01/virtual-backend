@@ -1,6 +1,4 @@
-package bo.gob.asfi.virtual.model.entiies;
-
-import java.io.Serializable;
+package bo.gob.asfi.virtual.modelfoo.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,11 +10,11 @@ import javax.persistence.Table;
 import lombok.Data;
 
 @Entity
-@Table(name="usuarios")
+@Table(name="foo_usuarios")
 @Data
-public class Usuario implements Serializable {
+public class FooUsuario {
 	
-	private static final long serialVersionUID = 1L;
+	//private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

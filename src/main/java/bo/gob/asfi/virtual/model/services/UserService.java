@@ -14,7 +14,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import bo.gob.asfi.virtual.model.entiies.User;
+import bo.gob.asfi.virtual.model.entities.User;
 import bo.gob.asfi.virtual.model.repositories.UserRepository;
 
 @Service
