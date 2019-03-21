@@ -1,4 +1,4 @@
-package bo.gob.asfi.virtual.model.entity;
+package bo.gob.asfi.virtual.model.entiies;
 
 import java.io.Serializable;
 
@@ -20,30 +20,30 @@ public class Usuario implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long idUsuario;
+	private Long id;
 	
-	@Column(nullable=false, length=15)
+	@Column(name="cedula_identidad", nullable=false, length=15)
 	private String cedulaIdentidad;
 
-	@Column(nullable=false, length=15)
+	@Column(name="lugar_expedido", nullable=false, length=15)
 	private String lugarExpedido;
 	
 	@Column(nullable=false, length=50)
 	private String nombres;
 	
-	@Column(nullable=true, length=30)
+	@Column(name="primer_apellido", nullable=true, length=30)
 	private String primerApellido;
 	
-	@Column(nullable=true, length=30)
+	@Column(name="segundo_apellido", nullable=true, length=30)
 	private String segundoApellido;
 	
-	@Column(nullable=true, length=30)
+	@Column(name="apellido_casada", nullable=true, length=30)
 	private String apellidoCasada;
 	
-	@Column(nullable=false, length=12)
+	@Column(name="fecha_nacimiento", nullable=false, length=12)
 	private String fechaNacimiento;
 	
-	@Column(nullable=false, length=70)
+	@Column(name="correo_electronico", nullable=false, length=70)
 	private String correoElectronico;
 	
 }

@@ -1,8 +1,8 @@
-package bo.gob.asfi.virtual.model.repository;
+package bo.gob.asfi.virtual.model.repositories;
 
 import org.springframework.data.repository.CrudRepository;
 
-import bo.gob.asfi.virtual.model.entity.User;
+import bo.gob.asfi.virtual.model.entiies.User;
 
 public interface UserRepository extends CrudRepository<User, Long> {
 	

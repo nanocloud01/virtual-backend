@@ -1,4 +1,4 @@
-package bo.gob.asfi.virtual.model.service;
+package bo.gob.asfi.virtual.model.services;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -14,8 +14,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import bo.gob.asfi.virtual.model.entity.User;
-import bo.gob.asfi.virtual.model.repository.UserRepository;
+import bo.gob.asfi.virtual.model.entiies.User;
+import bo.gob.asfi.virtual.model.repositories.UserRepository;
 
 @Service
 public class UserService implements UserDetailsService {

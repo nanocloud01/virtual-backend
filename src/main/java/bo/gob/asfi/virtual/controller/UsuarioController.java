@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import bo.gob.asfi.virtual.model.entity.Usuario;
-import bo.gob.asfi.virtual.model.service.UsuarioService;
+import bo.gob.asfi.virtual.model.entiies.Usuario;
+import bo.gob.asfi.virtual.model.services.UsuarioService;
 
 @RestController
 public class UsuarioController {

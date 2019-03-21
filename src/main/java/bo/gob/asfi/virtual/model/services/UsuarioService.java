@@ -1,4 +1,4 @@
-package bo.gob.asfi.virtual.model.service;
+package bo.gob.asfi.virtual.model.services;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,8 +7,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import bo.gob.asfi.virtual.model.entity.Usuario;
-import bo.gob.asfi.virtual.model.repository.UsuarioRepository;
+import bo.gob.asfi.virtual.model.entiies.Usuario;
+import bo.gob.asfi.virtual.model.repositories.UsuarioRepository;
 
 @Service
 public class UsuarioService {
