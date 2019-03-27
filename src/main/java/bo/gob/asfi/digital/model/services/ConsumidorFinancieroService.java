@@ -22,6 +22,7 @@ public class ConsumidorFinancieroService {
 	}
 	
 	public ConsumidorFinanciero AddConsumidorFinanciero(ConsumidorFinanciero consumidorFinanciero) {
+		consumidorFinanciero.getUsuarioConsumidorFinanciero().setIdConsumidorFinanciero(consumidorFinanciero);
 		return consumidorFinancieroRepository.save(consumidorFinanciero);
 	}
 	
