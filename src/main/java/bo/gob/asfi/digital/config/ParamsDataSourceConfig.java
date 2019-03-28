@@ -23,24 +23,24 @@ import org.springframework.transaction.PlatformTransactionManager;
 
 @Configuration
 @EnableJpaRepositories(
-		basePackages = "bo.gob.asfi.digital.modelfoo.repositories",
-        entityManagerFactoryRef = "ordersEntityManagerFactory",
-        transactionManagerRef = "ordersTransactionManager"
+		basePackages = "bo.gob.asfi.digital.params.repositories",
+        entityManagerFactoryRef = "paramsEntityManagerFactory",
+        transactionManagerRef = "paramsTransactionManager"
 )
-public class SecondDataSourceConfig {
+public class ParamsDataSourceConfig {
 	
 	@Autowired
 	private Environment env;
 	
 	@Bean
-    @ConfigurationProperties(prefix="spring.datasource2")
-    public DataSourceProperties ordersDataSourceProperties() {
+    @ConfigurationProperties(prefix="spring.datasource-params")
+    public DataSourceProperties paramsDataSourceProperties() {
         return new DataSourceProperties();
     }
     
     @Bean
-    public DataSource ordersDataSource() {
-        DataSourceProperties primaryDataSourceProperties = ordersDataSourceProperties();
+    public DataSource paramsDataSource() {
+        DataSourceProperties primaryDataSourceProperties = paramsDataSourceProperties();
 		return DataSourceBuilder.create()
         			.driverClassName(primaryDataSourceProperties.getDriverClassName())
         			.url(primaryDataSourceProperties.getUrl())
@@ -50,18 +50,18 @@ public class SecondDataSourceConfig {
     }
     
     @Bean
-    public PlatformTransactionManager ordersTransactionManager()
+    public PlatformTransactionManager paramsTransactionManager()
     {
-        EntityManagerFactory factory = ordersEntityManagerFactory().getObject();
+        EntityManagerFactory factory = paramsEntityManagerFactory().getObject();
         return new JpaTransactionManager(factory);
     }
 
     @Bean
-    public LocalContainerEntityManagerFactoryBean ordersEntityManagerFactory()
+    public LocalContainerEntityManagerFactoryBean paramsEntityManagerFactory()
     {
     	LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
-        factory.setDataSource(ordersDataSource());
-        factory.setPackagesToScan(new String[]{"bo.gob.asfi.digital.modelfoo.entities"});
+        factory.setDataSource(paramsDataSource());
+        factory.setPackagesToScan(new String[]{"bo.gob.asfi.digital.params.entities"});
         factory.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
 
         Properties jpaProperties = new Properties();
@@ -74,14 +74,14 @@ public class SecondDataSourceConfig {
     }
     
     @Bean
-	public DataSourceInitializer ordersDataSourceInitializer() 
+	public DataSourceInitializer paramsDataSourceInitializer() 
 	{
 		DataSourceInitializer dataSourceInitializer = new DataSourceInitializer();
-		dataSourceInitializer.setDataSource(ordersDataSource());
+		dataSourceInitializer.setDataSource(paramsDataSource());
 		ResourceDatabasePopulator databasePopulator = new ResourceDatabasePopulator();
-		databasePopulator.addScript(new ClassPathResource("orders-data.sql"));
+		databasePopulator.addScript(new ClassPathResource("params-data.sql"));
 		dataSourceInitializer.setDatabasePopulator(databasePopulator);
-		dataSourceInitializer.setEnabled(env.getProperty("datasource.orders.initialize", Boolean.class, false));
+		dataSourceInitializer.setEnabled(env.getProperty("datasource.params.initialize", Boolean.class, false));
 		return dataSourceInitializer;
 	}
 

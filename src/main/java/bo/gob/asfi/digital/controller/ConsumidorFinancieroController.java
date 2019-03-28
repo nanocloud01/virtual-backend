@@ -11,17 +11,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import bo.gob.asfi.digital.model.entities.ConsumidorFinanciero;
 import bo.gob.asfi.digital.model.services.ConsumidorFinancieroService;
-import bo.gob.asfi.digital.modelfoo.entities.FooUsuario;
-import bo.gob.asfi.digital.modelfoo.services.FooUsuarioService;
 
 @RestController
 public class ConsumidorFinancieroController {
 	
 	@Autowired
 	private ConsumidorFinancieroService consumidorFinancieroService;
-	
-	@Autowired
-	private FooUsuarioService fooUsuarioService;
 	
 	@RequestMapping("/consumidoresfinancieros")
 	public List<ConsumidorFinanciero> getUsuarios() {
@@ -37,11 +32,6 @@ public class ConsumidorFinancieroController {
 	public ConsumidorFinanciero addConsumidorFinanciero(@RequestBody ConsumidorFinanciero consumidorFinanciero) {
 		ConsumidorFinanciero c = consumidorFinancieroService.AddConsumidorFinanciero(consumidorFinanciero);
 		return c;
-	}
-	
-	@RequestMapping("/consumidoresfinancieros2")
-	public List<FooUsuario> getUsuarios2() {
-		return fooUsuarioService.getAllUsuarios();
 	}
 
 }

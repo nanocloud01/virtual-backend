@@ -11,6 +11,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.core.env.Environment;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
@@ -24,23 +25,24 @@ import org.springframework.transaction.PlatformTransactionManager;
 @Configuration
 @EnableJpaRepositories(
 		basePackages = "bo.gob.asfi.digital.model.repositories",
-        entityManagerFactoryRef = "securityEntityManagerFactory",
-        transactionManagerRef = "securityTransactionManager"
+        entityManagerFactoryRef = "digitalEntityManagerFactory",
+        transactionManagerRef = "digitalTransactionManager"
 )
 public class DigitalDataSourceConfig {
 	
 	@Autowired
 	private Environment env;
-		
+	
+	@Primary
     @Bean
     @ConfigurationProperties(prefix="spring.datasource")
-    public DataSourceProperties securityDataSourceProperties() {
+    public DataSourceProperties digitalDataSourceProperties() {
         return new DataSourceProperties();
     }
     
     @Bean
-    public DataSource securityDataSource() {
-        DataSourceProperties securityDataSourceProperties = securityDataSourceProperties();
+    public DataSource digitalDataSource() {
+        DataSourceProperties securityDataSourceProperties = digitalDataSourceProperties();
 		return DataSourceBuilder.create()
         			.driverClassName(securityDataSourceProperties.getDriverClassName())
         			.url(securityDataSourceProperties.getUrl())
@@ -50,17 +52,18 @@ public class DigitalDataSourceConfig {
     }
     
     @Bean
-    public PlatformTransactionManager securityTransactionManager()
+    public PlatformTransactionManager digitalTransactionManager()
     {
-        EntityManagerFactory factory = securityEntityManagerFactory().getObject();
+        EntityManagerFactory factory = digitalEntityManagerFactory().getObject();
         return new JpaTransactionManager(factory);
     }
-
+    
+    @Primary
     @Bean
-    public LocalContainerEntityManagerFactoryBean securityEntityManagerFactory()
+    public LocalContainerEntityManagerFactoryBean digitalEntityManagerFactory()
     {
         LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
-        factory.setDataSource(securityDataSource());
+        factory.setDataSource(digitalDataSource());
         factory.setPackagesToScan(new String[]{"bo.gob.asfi.digital.model.entities"});
         factory.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
         
@@ -72,15 +75,16 @@ public class DigitalDataSourceConfig {
         return factory;
     }
     
+    @Primary
     @Bean
-	public DataSourceInitializer securityDataSourceInitializer() 
+	public DataSourceInitializer digitalDataSourceInitializer() 
 	{
 		DataSourceInitializer dataSourceInitializer = new DataSourceInitializer();
-		dataSourceInitializer.setDataSource(securityDataSource());
+		dataSourceInitializer.setDataSource(digitalDataSource());
 		ResourceDatabasePopulator databasePopulator = new ResourceDatabasePopulator();
-		databasePopulator.addScript(new ClassPathResource("security-data.sql"));
+		databasePopulator.addScript(new ClassPathResource("digital-data.sql"));
 		dataSourceInitializer.setDatabasePopulator(databasePopulator);
-		dataSourceInitializer.setEnabled(env.getProperty("datasource.security.initialize", Boolean.class, false));
+		dataSourceInitializer.setEnabled(env.getProperty("datasource.digital.initialize", Boolean.class, false));
 		return dataSourceInitializer;
 	}
 

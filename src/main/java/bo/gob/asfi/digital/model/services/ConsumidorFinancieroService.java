@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import bo.gob.asfi.digital.model.entities.ConsumidorFinanciero;
 import bo.gob.asfi.digital.model.repositories.ConsumidorFinancieroRepository;
@@ -15,6 +16,7 @@ public class ConsumidorFinancieroService {
 	@Autowired
 	private ConsumidorFinancieroRepository consumidorFinancieroRepository;
 	
+	@Transactional("digitalTransactionManager")
 	public List<ConsumidorFinanciero> getAllUsuarios() {
 		List<ConsumidorFinanciero> usuarios = new ArrayList<>();
 		consumidorFinancieroRepository.findAll().forEach(usuarios ::add);
