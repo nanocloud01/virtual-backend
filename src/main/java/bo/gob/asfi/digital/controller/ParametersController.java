@@ -16,8 +16,7 @@ public class ParametersController {
 	private ClasificadorService clasificadorService;
 	
 	@RequestMapping("/clasificador")
-	public List<Clasificador> getUsuarios2() {
-		System.out.println("rest");
+	public List<Clasificador> getClasificador() {
 		return clasificadorService.getClasificador();
 	}
 

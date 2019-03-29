@@ -1,35 +1,25 @@
 package bo.gob.asfi.digital.model.services;
 
-import java.util.ArrayList;
+
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import bo.gob.asfi.digital.model.entities.ConsumidorFinanciero;
-import bo.gob.asfi.digital.model.repositories.ConsumidorFinancieroRepository;
 
-@Service
-public class ConsumidorFinancieroService {
+public interface ConsumidorFinancieroService {
 	
-	@Autowired
-	private ConsumidorFinancieroRepository consumidorFinancieroRepository;
+	public List<ConsumidorFinanciero> getAllConsumidoresFinancieros();	
 	
-	@Transactional("digitalTransactionManager")
-	public List<ConsumidorFinanciero> getAllUsuarios() {
-		List<ConsumidorFinanciero> usuarios = new ArrayList<>();
-		consumidorFinancieroRepository.findAll().forEach(usuarios ::add);
-		return usuarios;
-	}
+	public Page<ConsumidorFinanciero> getAllConsumidoresFinancierosPageable(Pageable pageable);
 	
-	public ConsumidorFinanciero AddConsumidorFinanciero(ConsumidorFinanciero consumidorFinanciero) {
-		consumidorFinanciero.getUsuarioConsumidorFinanciero().setIdConsumidorFinanciero(consumidorFinanciero);
-		return consumidorFinancieroRepository.save(consumidorFinanciero);
-	}
+	public ConsumidorFinanciero getConsumidorFinanciero(Integer id);
 	
-	public ConsumidorFinanciero getUsuario(Integer id) {
-		return consumidorFinancieroRepository.findById(id).orElse(null);
-	}
+	public ConsumidorFinanciero AddConsumidorFinanciero(ConsumidorFinanciero consumidorFinanciero);
+	
+	public ConsumidorFinanciero updateConsumidorFinanciero(ConsumidorFinanciero consumidorFinanciero);
+	
+	public void deleteConsumidorFinanciero(Integer id);
 
 }
