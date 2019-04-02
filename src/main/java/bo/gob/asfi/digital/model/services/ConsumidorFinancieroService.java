@@ -14,6 +14,8 @@ public interface ConsumidorFinancieroService {
 	
 	public Page<ConsumidorFinanciero> getAllConsumidoresFinancierosPageable(Pageable pageable);
 	
+	public Page<ConsumidorFinanciero> getFindByCedulaIdentidadContaining(String cedulaIdentidad, Pageable pageable);
+	
 	public ConsumidorFinanciero getConsumidorFinanciero(Integer id);
 	
 	public ConsumidorFinanciero AddConsumidorFinanciero(ConsumidorFinanciero consumidorFinanciero);

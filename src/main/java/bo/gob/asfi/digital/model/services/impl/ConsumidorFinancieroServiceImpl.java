@@ -32,6 +32,11 @@ public class ConsumidorFinancieroServiceImpl implements ConsumidorFinancieroServ
 	}
 	
 	@Override
+	public Page<ConsumidorFinanciero> getFindByCedulaIdentidadContaining(String cedulaIdentidad, Pageable pageable){
+		return consumidorFinancieroRepository.findByCedulaIdentidadContaining(cedulaIdentidad, pageable);
+	}
+	
+	@Override
 	public ConsumidorFinanciero getConsumidorFinanciero(Integer id) {
 		return consumidorFinancieroRepository.findById(id).orElse(null);
 	}

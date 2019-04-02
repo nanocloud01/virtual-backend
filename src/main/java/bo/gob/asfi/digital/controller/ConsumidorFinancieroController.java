@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import bo.gob.asfi.digital.model.entities.ConsumidorFinanciero;
 import bo.gob.asfi.digital.model.services.ConsumidorFinancieroService;
+import bo.gob.asfi.mail.MailClient;
 
 @RestController
 @RequestMapping("/consumidoresfinancieros")
@@ -26,6 +27,13 @@ public class ConsumidorFinancieroController {
 	
 	@Autowired
 	private ConsumidorFinancieroService consumidorFinancieroService;
+	
+	@GetMapping(value = "/mail")
+	public String getMail() {
+		MailClient mc = new MailClient();
+		int result = mc.correoAdjunto("mesaje eclipse-03");
+		return "mail-03 -> " + result;
+	}
 	
 	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<ConsumidorFinanciero> getConsumidoresFinancieros() {
@@ -39,6 +47,18 @@ public class ConsumidorFinancieroController {
 			con = consumidorFinancieroService.getAllConsumidoresFinancierosPageable(pageable);
 		} catch (Exception e) {
 			System.out.println("listarPageable "+e.getMessage());
+			return new ResponseEntity<Page<ConsumidorFinanciero>>(con, HttpStatus.INTERNAL_SERVER_ERROR);			
+		}
+		return new ResponseEntity<Page<ConsumidorFinanciero>>(con, HttpStatus.OK);
+	}
+	
+	@GetMapping(value = "/pageable/{cedulaIdentidad}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Page<ConsumidorFinanciero>> getConsumidoresFinancieros(@PathVariable String cedulaIdentidad, Pageable pageable) {
+		Page<ConsumidorFinanciero> con = null;
+		try {
+			con = consumidorFinancieroService.getFindByCedulaIdentidadContaining(cedulaIdentidad, pageable);
+		} catch (Exception e) {
+			System.out.println("listarPageable/ci "+e.getMessage());
 			return new ResponseEntity<Page<ConsumidorFinanciero>>(con, HttpStatus.INTERNAL_SERVER_ERROR);			
 		}
 		return new ResponseEntity<Page<ConsumidorFinanciero>>(con, HttpStatus.OK);
