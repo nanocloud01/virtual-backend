@@ -13,8 +13,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
 
@@ -27,9 +30,10 @@ public class User implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	@Column(name = "id_usuario_consumidor_financiero")
+	private Integer id;
 	
-	@Column(unique=true, length=20)
+	@Column(unique=true, length=70)
 	private String username;
 	
 	@Column(length=60)
@@ -37,6 +41,12 @@ public class User implements Serializable {
 	
 	private Boolean enabled;
 	
+	@JsonIgnore
+    @JoinColumn(name = "id_consumidor_financiero", referencedColumnName = "id_consumidor_financiero")
+    @OneToOne(fetch = FetchType.LAZY, optional = false)
+    private ConsumidorFinanciero idConsumidorFinanciero;
+	
+	@JsonIgnore
 	@ManyToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
 	@JoinTable(name="digital.users_roles", 
 			joinColumns=@JoinColumn(name="user_id"),

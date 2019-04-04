@@ -14,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 
@@ -31,8 +32,8 @@ public class ConsumidorFinanciero implements Serializable {
 	@Column(name="id_consumidor_financiero", nullable=false)
 	private Integer id;
 	
-	@Column(name="cedula_identidad", nullable=false, length=30)
-	private String cedulaIdentidad;
+	@Column(name="documento_identificacion", nullable=false, length=30)
+	private String documentoIdentificacion;
 	
 	@Column(name="complemento_cedula_identidad", nullable=true, length=5)
 	private String complementoCedulaIdentidad;
@@ -40,8 +41,8 @@ public class ConsumidorFinanciero implements Serializable {
 	@Column(name="lugar_expedicion", nullable=false, length=2)
 	private String lugarExpedicion;
 	
-	@Column(nullable=false, length=50)
-	private String nombres;
+	@Column(name="nombres_razon_social", nullable=false, length=50)
+	private String nombresRazonSocial;
 	
 	@Column(name="primer_apellido", nullable=true, length=50)
 	private String primerApellido;
@@ -75,6 +76,6 @@ public class ConsumidorFinanciero implements Serializable {
 	@OneToOne(fetch = FetchType.LAZY, 
 			cascade = CascadeType.ALL, 
 			mappedBy = "idConsumidorFinanciero")
-    private UsuarioConsumidorFinanciero usuarioConsumidorFinanciero;
+    private User user;
 	
 }

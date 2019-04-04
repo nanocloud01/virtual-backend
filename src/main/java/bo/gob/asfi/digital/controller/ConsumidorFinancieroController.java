@@ -30,9 +30,14 @@ public class ConsumidorFinancieroController {
 	
 	@GetMapping(value = "/mail")
 	public String getMail() {
-		MailClient mc = new MailClient();
-		int result = mc.correoAdjunto("mesaje eclipse-03");
-		return "mail-03 -> " + result;
+		MailClient mailClient = new MailClient();
+		StringBuilder sb = new StringBuilder();
+		sb.append("primera linea <br/>");
+		sb.append("segunda linea <br/>");
+		sb.append("tercera linea");
+		int result = mailClient.correo(sb.toString(), "hyujra@asfi.gob.bo", 
+				"hyujra@asfi.gob.bo", "Contrseña Virtual");
+		return "" + result;
 	}
 	
 	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
@@ -52,11 +57,11 @@ public class ConsumidorFinancieroController {
 		return new ResponseEntity<Page<ConsumidorFinanciero>>(con, HttpStatus.OK);
 	}
 	
-	@GetMapping(value = "/pageable/{cedulaIdentidad}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Page<ConsumidorFinanciero>> getConsumidoresFinancieros(@PathVariable String cedulaIdentidad, Pageable pageable) {
+	@GetMapping(value = "/pageable/{documentoIdentificacion}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Page<ConsumidorFinanciero>> getConsumidoresFinancieros(@PathVariable String documentoIdentificacion, Pageable pageable) {
 		Page<ConsumidorFinanciero> con = null;
 		try {
-			con = consumidorFinancieroService.getFindByCedulaIdentidadContaining(cedulaIdentidad, pageable);
+			con = consumidorFinancieroService.getFindByDocumentoIdentificacionContaining(documentoIdentificacion, pageable);
 		} catch (Exception e) {
 			System.out.println("listarPageable/ci "+e.getMessage());
 			return new ResponseEntity<Page<ConsumidorFinanciero>>(con, HttpStatus.INTERNAL_SERVER_ERROR);			

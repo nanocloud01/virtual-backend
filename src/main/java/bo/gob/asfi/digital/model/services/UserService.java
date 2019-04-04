@@ -13,7 +13,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import bo.gob.asfi.digital.model.entities.User;
 import bo.gob.asfi.digital.model.repositories.UserRepository;
 
@@ -26,7 +25,7 @@ public class UserService implements UserDetailsService {
 	private UserRepository userRepository;
 
 	@Override
-	@Transactional(readOnly=true)
+	@Transactional(value="digitalTransactionManager", readOnly=true)
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		
 		User user = userRepository.findByUsername(username);

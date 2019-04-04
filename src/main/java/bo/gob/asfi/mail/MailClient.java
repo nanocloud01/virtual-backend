@@ -4,11 +4,23 @@ import java.rmi.RemoteException;
 
 public class MailClient {
 
-	public int correoAdjunto(String mensaje) {
+	public int correoAdjunto(String mensaje, String destino, String origen, String asunto, String nombreArchivo) {
 		int resp = 1;
 		IServicioCorreoElectronicoProxy proxy = new IServicioCorreoElectronicoProxy();
 		try {
-			proxy.envioCorreoAdjunto(mensaje, "hyujra@asfi.gob.bo", "hyujra@asfi.gob.bo", "prueba eclipse", "eclipse.txt", hexStringToByteArray("Hernan"));
+			proxy.envioCorreoAdjunto(mensaje, destino, origen, asunto, nombreArchivo, hexStringToByteArray("Hernan"));
+		} catch (RemoteException e) {
+			resp = 0;
+			e.printStackTrace();
+		}
+		return resp;
+	}
+	
+	public int correo(String mensaje, String destino, String origen, String asunto) {
+		int resp = 1;
+		IServicioCorreoElectronicoProxy proxy = new IServicioCorreoElectronicoProxy();
+		try {
+			proxy.envioCorreo(mensaje, destino, origen, asunto);
 		} catch (RemoteException e) {
 			resp = 0;
 			e.printStackTrace();
