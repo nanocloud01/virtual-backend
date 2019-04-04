@@ -10,15 +10,15 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>bo.gob.asfi</groupId>
-	<artifactId>virtual-backend</artifactId>
+	<artifactId>digital-backend</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
-	<name>virtual-backend</name>
-	<description>Demo project for Spring Boot</description>
+	<name>digital-backend</name>
+	<description>Demo project for ASFI - digital backend</description>
 
 	<properties>
 		<java.version>1.8</java.version>
-		<start-class>bo.gob.asfi.virtual.VirtualBackendApplication</start-class>
+		<start-class>bo.gob.asfi.digital.DigitalBackendApplication</start-class>
 	</properties>
 
 	<dependencies>
